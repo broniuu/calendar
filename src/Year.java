@@ -19,6 +19,10 @@ public class Year {
         return leap;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     //funkcja sprawdza czy rok jest przestępny
     public void checkIfLeap() {
         //lata przestępne to takie, których numeracja:
