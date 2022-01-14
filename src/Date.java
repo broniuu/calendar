@@ -142,4 +142,23 @@ public class Date implements Comparable<Date> {
     public int hashCode() {
         return Objects.hash(day, month, year);
     }
+
+    public String toString(String arg) {
+        if(arg.equals("day_name")){
+            return this.nameOfDay + ", " + this.day + " " + month.getName() + ' ' + year.getNumber();
+        }
+        if(arg.equals("no_day_name")){
+            return this.day + " " + month.getName() + ' ' + year.getNumber();
+        }
+        if(arg.equals("roman_month")){
+            String romanNumbers[] = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"};
+            int index = month.getNumber() - 1;
+            return this.day + " " + romanNumbers[index] + ' ' + year.getNumber();
+        }
+        if(arg.equals("shortcut_month")){
+            String shortcutMonthName = month.getName().substring(0,3);
+            return this.day + "-" + shortcutMonthName + '-' + year.getNumber();
+        }
+        return  day + "." + month.getName() + '.' + year.getNumber();
+    }
 }

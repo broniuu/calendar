@@ -3,6 +3,11 @@ import java.util.List;
 public class Month {
     private int numberOfDays;
     private int number;
+
+    public String getName() {
+        return name;
+    }
+
     private String name;
 
     Month(int number, Year year){

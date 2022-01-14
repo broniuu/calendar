@@ -17,5 +17,10 @@ public class Main extends RuntimeException {
         long stop2 = System.nanoTime();
 
         long result2 = stop2 - start2;
+
+        System.out.println(data.toString("day_name_first"));
+        System.out.println(data.toString("no_day_name"));
+        System.out.println(data.toString("roman_month"));
+        System.out.println(data.toString("shortcut_month"));
     }
 }
