@@ -1,12 +1,12 @@
 import java.util.Objects;
 
-public class Date implements Comparable<Date> {
+public class MyDate implements Comparable<MyDate> {
     private int day;
     private Month month;
     private Year year;
     private String nameOfDay;
 
-    Date(int day, int monthNumber, int yearNumber) throws MonthException, DayException {
+    MyDate(int day, int monthNumber, int yearNumber) throws MonthException, DayException {
         setYear(new Year(yearNumber));
         if (monthNumber > 12 || monthNumber < 1) { //sprawdzam czy numer miesiąca mieści sie w zakresie
             MonthException monthException = new MonthException("Number of month is off the scope");
@@ -22,7 +22,7 @@ public class Date implements Comparable<Date> {
         setDay(day);
     }
 
-    Date(int day, Month month, Year year) {
+    MyDate(int day, Month month, Year year) {
         if(day <= month.getNumberOfDays() && day < 0) { //sprawdzam czy aktualny dzień mieści się w wyznaczonym przedziale
             setDay(day);
             setMonth(month);
@@ -48,7 +48,7 @@ public class Date implements Comparable<Date> {
     }
 
     public void addWeeks(int numberOfWeeks){
-        Date data = this;
+        MyDate data = this;
         for(int i=0; i<numberOfWeeks; ++i){
             data.day = this.day + 7;
             if(data.day > this.month.getNumberOfDays()){
@@ -88,7 +88,7 @@ public class Date implements Comparable<Date> {
 
     public void setDayName(){
         final String[] namesOfWeekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-        Date referentialDate = new Date(2,1,2022); // niedziela
+        MyDate referentialDate = new MyDate(2,1,2022); // niedziela
         while(referentialDate.compareTo(this) < 0 ){
             referentialDate.addWeek();
         }
@@ -125,7 +125,7 @@ public class Date implements Comparable<Date> {
     }
 
     @Override
-    public int compareTo(Date data) {
+    public int compareTo(MyDate data) {
         int yearResult = this.year.getNumber() - data.year.getNumber();
         if (yearResult != 0) {
             return yearResult;

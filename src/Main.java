@@ -1,26 +1,38 @@
+import java.util.*;
+
 public class Main extends RuntimeException {
 
     public static void main(String[] args) {
-        Date data = new Date(8, 5, 2023);
-        Date data2 = new Date(24, 12, 1);
+        MyDate[] dateArray = new MyDate[3];
+        dateArray[0] = new MyDate(1, 1, 2022);
+        dateArray[1] = new MyDate(1, 12, 2022);
+        dateArray[2] = new MyDate(2, 2, 2022);
 
-        //pierwszy pomiar (metoda zwykła)
-        long start = System.nanoTime();
-        data.setDayName();
-        long stop=System.nanoTime();
+        List<MyDate> dateList = new ArrayList<MyDate>();
+        dateList.add(new MyDate(5, 5, 2022));
+        dateList.add(new MyDate(4, 4, 2023));
+        dateList.add(new MyDate(6, 6, 2022));
 
-        long result1 = stop - start;
+        System.out.println("------Array-------");
+        for (MyDate date: dateArray){
+            System.out.println(date.toString());
+        }
+        System.out.println("------List-------");
+        for (MyDate date: dateList){
+            System.out.println(date.toString());
+        }
 
-        //drugi pomiar (metoda modulo)
-        long start2 = System.nanoTime();
-        data2.setDayNameModulo();
-        long stop2 = System.nanoTime();
+        Arrays.sort(dateArray);
+        Collections.sort(dateList);
+        System.out.print("\n\n After Sort: \n");
 
-        long result2 = stop2 - start2;
-
-        System.out.println(data.toString("day_name_first"));
-        System.out.println(data.toString("no_day_name"));
-        System.out.println(data.toString("roman_month"));
-        System.out.println(data.toString("shortcut_month"));
+        System.out.println("------Array-------");
+        for (MyDate date: dateArray){
+            System.out.println(date.toString());
+        }
+        System.out.println("------List-------");
+        for (MyDate date: dateList){
+            System.out.println(date.toString());
+        }
     }
 }
