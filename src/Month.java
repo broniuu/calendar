@@ -1,5 +1,10 @@
 import java.util.List;
 
+/**
+ * Month is public class that contains number of days within the month, and number of month
+ *
+ */
+
 public class Month {
     private int numberOfDays;
     private int number;
@@ -18,25 +23,61 @@ public class Month {
         }
     }
 
+    /**
+     * Sets number of days
+     *
+     * @param numberOfDays  number of days in month
+     */
+
     public void setNumberOfDays(int numberOfDays) {
         this.numberOfDays = numberOfDays;
     }
+
+    /**
+     * Sets number of month
+     *
+     * @param number  number of month
+     */
 
     public void setNumber(int number) {
         this.number = number;
     }
 
+    /**
+     * Sets name of month
+     *
+     * @param name  name of month
+     */
+
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * Gets number of days in year
+     *
+     */
 
     public int getNumberOfDays() {
         return numberOfDays;
     }
 
+    /**
+     * Gets number of month
+     *
+     */
+
     public int getNumber() {
         return number;
     }
+
+    /**
+     * It finds number of days in month.
+     * If year is leap, February will get 29 days. If not, it will get 28 days
+     *
+     * @param number    number of month
+     * @param year  object of Year class
+     */
 
     public void findNumberOfDays(int number, Year year){
         //sprawdzamy ile dni w miesiącu
@@ -57,6 +98,12 @@ public class Month {
                 break;
         }
     }
+
+    /**
+     * assigns name for month using its number
+     *
+     * @param number    number of monht
+     */
 
     public void nameTheMonth(int number){
         List<String> namesOfMonth = List.of("JANUARY", "FEBRUARY", "MARCH", "APRIL",

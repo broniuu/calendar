@@ -1,5 +1,11 @@
 import java.util.*;
 
+/**
+ * This class is for tests
+ *
+ * @author  Filip Broniek
+ */
+
 public class Main extends RuntimeException {
 
     public static void main(String[] args) {

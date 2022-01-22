@@ -1,11 +1,24 @@
 import java.util.Objects;
 
+/**
+ * This class contains date, and methods that manipulates on it
+ *
+ */
+
+
 public class MyDate implements Comparable<MyDate> {
     private int day;
     private Month month;
     private Year year;
     private String nameOfDay;
 
+    /**
+     * Class constructor that uses only numbers
+     *
+     * @param day   number of day
+     * @param monthNumber   number of month
+     * @param yearNumber   number of year
+     */
     MyDate(int day, int monthNumber, int yearNumber) throws MonthException, DayException {
         setYear(new Year(yearNumber));
         if (monthNumber > 12 || monthNumber < 1) { //sprawdzam czy numer miesiąca mieści sie w zakresie
@@ -22,6 +35,15 @@ public class MyDate implements Comparable<MyDate> {
         setDay(day);
     }
 
+
+    /**
+     * Class constructor that operates on objects
+     *
+     * @param day   number of day
+     * @param month month with all its attributes
+     * @param year year with all its attributes
+     */
+
     MyDate(int day, Month month, Year year) {
         if(day <= month.getNumberOfDays() && day < 0) { //sprawdzam czy aktualny dzień mieści się w wyznaczonym przedziale
             setDay(day);
@@ -30,38 +52,47 @@ public class MyDate implements Comparable<MyDate> {
         }
     }
 
+    /**
+     * Sets day
+     *
+     * @param day number of day
+     */
     public void setDay(int day) {
         this.day = day;
     }
 
+    /**
+     * Sets month
+     *
+     * @param month month with all its attributes
+     */
     public void setMonth(Month month) {
         this.month = month;
     }
 
+
+    /**
+     * Sets year
+     *
+     * @param year year with all its attributes
+     */
     public void setYear(Year year) {
         this.year = year;
     }
 
+
+    /**
+     * Convert date to String
+     *
+     */
     @Override
     public String toString() {
         return  day + "." + month.getNumber() + '.' + year.getNumber();
     }
 
-    public void addWeeks(int numberOfWeeks){
-        MyDate data = this;
-        for(int i=0; i<numberOfWeeks; ++i){
-            data.day = this.day + 7;
-            if(data.day > this.month.getNumberOfDays()){
-                data.day = data.day - data.month.getNumberOfDays();
-                data.month.setNumber(month.getNumber()+1);
-                if(month.getNumber() > 12){
-                    month.setNumber(1);
-                    year.setNumber(year.getNumber()+1);
-                }
-            }
-        }
-    }
-
+    /**
+     * Moves date one week forward
+     */
     public void addWeek() {
         int day = this.day + 7;
         int monthNumber = this.month.getNumber();
@@ -85,7 +116,12 @@ public class MyDate implements Comparable<MyDate> {
 
     }
 
-
+    /**
+     * assigns a name of week, using current date and referential date
+     * referential is constant, and its have day
+     * Method can search date after referential date (2.1.2022) only
+     * Ability to search date before it will be added in next update
+     */
     public void setDayName(){
         final String[] namesOfWeekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         MyDate referentialDate = new MyDate(2,1,2022); // niedziela
@@ -103,6 +139,11 @@ public class MyDate implements Comparable<MyDate> {
         this.nameOfDay = namesOfWeekDays[rightIndex];
     }
 
+    /**
+     * Assigns a name of week, using modulo operation
+     * Method create unchangeable array of days from year beginning, to beginning of next months
+     * It's more optimized version of setDayName method
+     */
     public void setDayNameModulo(){
         final String[] namesOfWeekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         final int daysFromYearBeginning[] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
@@ -124,25 +165,50 @@ public class MyDate implements Comparable<MyDate> {
         this.nameOfDay = namesOfWeekDays[numberOfDay];
     }
 
+    /**
+     * compares dates
+     *
+     * @param date
+     * @return positive, negative, or zero number
+     * @see Comparable
+     */
+
     @Override
-    public int compareTo(MyDate data) {
-        int yearResult = this.year.getNumber() - data.year.getNumber();
+    public int compareTo(MyDate date) {
+        int yearResult = this.year.getNumber() - date.year.getNumber();
         if (yearResult != 0) {
             return yearResult;
         }
-        int MonthResult = this.month.getNumber() - data.month.getNumber();
+        int MonthResult = this.month.getNumber() - date.month.getNumber();
         if (MonthResult != 0) {
             return MonthResult;
         }
-        int DayResult = this.day - data.day;
+        int DayResult = this.day - date.day;
         return DayResult;
     }
 
+    /**
+     * @see Comparable
+     * @return hash code
+     */
     @Override
     public int hashCode() {
         return Objects.hash(day, month, year);
     }
 
+
+    /**
+     * Convert date to string.
+     * We can specify, what format of date we want.
+     *
+     * @param arg   name of format
+     *              - "day_name" [name of day],[number of day] [name of month] [number of year]
+     *              - "no_day_name" [number of day] [number of month] [number of year]
+     *              - "roman_month" [number of day] [roman number of month] [number of year]
+     *              - "shortcut_month" [number of day]-[shortcut number of day]-[number of year]
+     *              - other string [number of day].[name of month].[number of year]
+     * @return date as text
+     */
     public String toString(String arg) {
         if(arg.equals("day_name")){
             return this.nameOfDay + ", " + this.day + " " + month.getName() + ' ' + year.getNumber();
