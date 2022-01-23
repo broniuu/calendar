@@ -1,10 +1,12 @@
+package Calendar;
+
 import javax.imageio.IIOException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * LogHandler is public class for handling logs in Calendar project
+ * LogHandler is public class for handling logs in Calendar
  */
 
 public class LogHandler {

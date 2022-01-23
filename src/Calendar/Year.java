@@ -1,3 +1,5 @@
+package Calendar;
+
 /**
  * Year is public class that contains number of years and its leap
  *
@@ -40,6 +42,8 @@ public class Year {
 
     /**
      * Gets leap of year
+     *
+     * @return leap of year
      */
 
     public boolean getLeap() {
@@ -48,6 +52,8 @@ public class Year {
 
     /**
      * Gets number of year
+     *
+     * @return number of year
      */
 
     public int getNumber() {

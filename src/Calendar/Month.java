@@ -1,3 +1,5 @@
+package Calendar;
+
 import java.util.List;
 
 /**
@@ -8,12 +10,24 @@ import java.util.List;
 public class Month {
     private int numberOfDays;
     private int number;
+    private String name;
+
+    /**
+     * Gets number of days
+     *
+     * @return name of month
+     */
 
     public String getName() {
         return name;
     }
 
-    private String name;
+    /**
+     * Class constructor, that check if number is in the scope
+     *
+     * @param number    number of month
+     * @param year  object of Calendar.Year class
+     */
 
     Month(int number, Year year){
         if(number <= 12) {
@@ -56,6 +70,7 @@ public class Month {
     /**
      * Gets number of days in year
      *
+     * @return number of days ine year
      */
 
     public int getNumberOfDays() {
@@ -65,6 +80,7 @@ public class Month {
     /**
      * Gets number of month
      *
+     * @return number of month
      */
 
     public int getNumber() {
@@ -76,7 +92,7 @@ public class Month {
      * If year is leap, February will get 29 days. If not, it will get 28 days
      *
      * @param number    number of month
-     * @param year  object of Year class
+     * @param year  object of Calendar.Year class
      */
 
     public void findNumberOfDays(int number, Year year){
@@ -102,7 +118,7 @@ public class Month {
     /**
      * assigns name for month using its number
      *
-     * @param number    number of monht
+     * @param number    number of month
      */
 
     public void nameTheMonth(int number){

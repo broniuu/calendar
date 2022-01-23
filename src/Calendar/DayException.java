@@ -1,3 +1,5 @@
+package Calendar;
+
 /**
  * This class represents exception given, when user enters wrong day number
  *

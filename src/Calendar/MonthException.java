@@ -1,5 +1,7 @@
+package Calendar;
+
 /**
- * This class represents exception given, when user enters wrong Month number
+ * This class represents exception given, when user enters wrong month number
  *
  * @author  Filip Broniek
  */

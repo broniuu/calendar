@@ -1,10 +1,14 @@
+package Calendar;
+
+import javax.swing.text.html.parser.Parser;
+import java.text.ParseException;
 import java.util.Objects;
 
 /**
  * This class contains date, and methods that manipulates on it
  *
+ * @see Comparable
  */
-
 
 public class MyDate implements Comparable<MyDate> {
     private int day;
@@ -19,7 +23,11 @@ public class MyDate implements Comparable<MyDate> {
      * @param monthNumber   number of month
      * @param yearNumber   number of year
      */
-    MyDate(int day, int monthNumber, int yearNumber) throws MonthException, DayException {
+    public MyDate(int day, int monthNumber, int yearNumber){
+        createDate(day, monthNumber, yearNumber);
+    }
+
+    private void createDate(int day, int monthNumber, int yearNumber) throws MonthException, DayException {
         setYear(new Year(yearNumber));
         if (monthNumber > 12 || monthNumber < 1) { //sprawdzam czy numer miesiąca mieści sie w zakresie
             MonthException monthException = new MonthException("Number of month is off the scope");
@@ -44,12 +52,27 @@ public class MyDate implements Comparable<MyDate> {
      * @param year year with all its attributes
      */
 
-    MyDate(int day, Month month, Year year) {
+    public MyDate(int day, Month month, Year year) {
         if(day <= month.getNumberOfDays() && day < 0) { //sprawdzam czy aktualny dzień mieści się w wyznaczonym przedziale
             setDay(day);
             setMonth(month);
             setYear(year);
         }
+    }
+
+    /**
+     * Class constructor that operates on strings
+     *
+     * @param dayNumberText String number of day
+     * @param monthNumberText   String number of month
+     * @param yearNumberText    String number of year
+     */
+
+    public MyDate(String dayNumberText, String monthNumberText, String yearNumberText){
+        int dayNumber = Integer.parseInt(dayNumberText);
+        int monthNumber = Integer.parseInt(monthNumberText);
+        int yearNumber = Integer.parseInt(yearNumberText);
+        createDate(dayNumber, monthNumber, yearNumber);
     }
 
     /**
@@ -101,13 +124,13 @@ public class MyDate implements Comparable<MyDate> {
         if (day > numberOfDays) {
             //this.day = this.day - month.getNumberOfDays();
             day = day - numberOfDays;
-            //this.month = new Month(this.month.getNumber()+1, this.year);
+            //this.month = new Calendar.Month(this.month.getNumber()+1, this.year);
             monthNumber = this.month.getNumber() + 1;
         }
         if (monthNumber > 12) {
-            //this.year = new Year(year.getNumber() + 1);
+            //this.year = new Calendar.Year(year.getNumber() + 1);
             yearNumber = yearNumber + 1;
-            //this.month = new Month(1,year);
+            //this.month = new Calendar.Month(1,year);
             monthNumber = 1;
         }
         this.day = day;
@@ -168,9 +191,8 @@ public class MyDate implements Comparable<MyDate> {
     /**
      * compares dates
      *
-     * @param date
+     * @param date  date that we want to compare with
      * @return positive, negative, or zero number
-     * @see Comparable
      */
 
     @Override
@@ -187,10 +209,6 @@ public class MyDate implements Comparable<MyDate> {
         return DayResult;
     }
 
-    /**
-     * @see Comparable
-     * @return hash code
-     */
     @Override
     public int hashCode() {
         return Objects.hash(day, month, year);
@@ -226,5 +244,19 @@ public class MyDate implements Comparable<MyDate> {
             return this.day + "-" + shortcutMonthName + '-' + year.getNumber();
         }
         return  day + "." + month.getName() + '.' + year.getNumber();
+    }
+
+    /**
+     * parse String that contains date, and convert it to MyData object
+     *
+     * @param dateText  date as String. Syntax: "[number of day]-[number of month]-[number of year]"
+     * @return specified data
+     */
+    public static MyDate parse(String dateText){
+        String[] dateNumbers = dateText.split("-");
+        if (dateNumbers.length != 3){
+            throw new DateParseException("number of arguments is not equals 3");
+        }
+        return new MyDate(dateNumbers[0], dateNumbers[1], dateNumbers[2]);
     }
 }
